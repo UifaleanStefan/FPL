@@ -10,6 +10,6 @@ tabulate
 webdriver_manager 
 tqdm 
 scikit-learn 
-tensorflow==2.10.0
+tensorflow
 xgboost 
 pulp
