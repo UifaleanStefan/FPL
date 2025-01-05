@@ -1,0 +1,25 @@
+<h1>Suggested Transfers</h1>
+
+<p><strong>Current Team:</strong> {{ current_team }}</p>
+<p><strong>Budget:</strong> {{ budget }}</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Sell Player</th>
+            <th>Buy Player</th>
+            <th>Point Difference</th>
+            <th>Price Difference</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transfer in transfers %}
+        <tr>
+            <td>{{ transfer['sell']['name'] }}</td>
+            <td>{{ transfer['buy']['name'] }}</td>
+            <td>{{ transfer['point_diff'] }}</td>
+            <td>{{ transfer['price_diff'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

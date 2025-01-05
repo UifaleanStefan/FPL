@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Replacement</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="header">
+        <a href="{{ url_for('my_team', team_id=team_id) }}" class="nav-link active">My Team</a>
+        <a href="{{ url_for('optimized_team', team_id=team_id) }}" class="nav-link">AI Rating</a>
+        <a href="{{ url_for('transfers', team_id=team_id) }}" class="nav-link">Transfers</a>
+        <a href="{{ url_for('players', team_id=team_id) }}" class="nav-link">Players</a>
+    </div>
+
+    <div class="content">
+        <h1>Replacing {{ player_to_replace['player_name'] }}</h1>
+        <p>Position: {{ player_to_replace['Pos'] }} | Price: {{ player_to_replace['price'] }} | Predicted Points (Next 5 GW): {{ player_to_replace['PredP5'] }}</p>
+
+        <h2>Top 3 Best Replacements</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Player Name</th>
+                    <th>Position</th>
+                    <th>Price</th>
+                    <th>Predicted Points (Next 5 GW)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for replacement in best_replacements %}
+                <tr>
+                    <td>{{ replacement.player_name }}</td>
+                    <td>{{ replacement.Pos }}</td>
+                    <td>{{ replacement.price }}</td>
+                    <td>{{ replacement.PredP5 }}</td>
+                    <td>
+                        <a href="{{ url_for('transfers', team_id=team_id, player_id=player_to_replace['player_id'], replacement_id=replacement['player_id']) }}">Replace with this Player</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

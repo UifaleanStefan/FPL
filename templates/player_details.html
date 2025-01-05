@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Replacement</title>
+</head>
+<body>
+    <h1>Choose a Player to Find Replacements</h1>
+
+    <!-- Dropdown to select player -->
+    <form action="{{ url_for('players', team_id=team_id) }}" method="GET">
+        <label for="player_id">Select a Player:</label>
+        <select name="player_id" id="player_id" onchange="this.form.submit()">
+            <option value="">-- Select a Player --</option>
+            {% for pick in picks_info %}
+                <option value="{{ pick['player_id'] }}">{{ pick['name'] }} ({{ pick['Pos'] }})</option>
+            {% endfor %}
+        </select>
+    </form>
+
+    {% if selected_player %}
+        <h2>Selected Player: {{ selected_player['name'] }} ({{ selected_player['Pos'] }})</h2>
+        <h3>Best 3 Replacements:</h3>
+        <ul>
+            {% for replacement in best_replacements %}
+                <li>{{ replacement['name'] }} - Predicted Points: {{ replacement['PredP5'] }} - Price: {{ replacement['price'] }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
