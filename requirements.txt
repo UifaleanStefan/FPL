@@ -1,4 +1,4 @@
---upgrade pip
+
 bs4 
 requests 
 numpy 
